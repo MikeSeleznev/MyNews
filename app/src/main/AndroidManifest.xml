@@ -3,15 +3,21 @@
           package="com.example.mynews">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
+            android:name=".MyApplication"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".Views.MainActivity">
+        <activity android:name=".views.MainActivity">
+        </activity>
+        <activity android:name=".views.WebActivity">
+        </activity>
+        <activity android:name=".views.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
