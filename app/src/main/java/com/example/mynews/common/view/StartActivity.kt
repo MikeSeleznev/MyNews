@@ -1,24 +1,24 @@
-package com.example.mynews.views
+package com.example.mynews.common.view
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
+import android.support.v7.app.AppCompatActivity
 import com.example.mynews.R
 
 class StartActivity : AppCompatActivity() {
+
+    companion object {
+        const val SPLASH_TIME = 1000L
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
 
-        val handler = Handler()
-        handler.postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+        Handler().postDelayed({
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
-        }, 5000)
-
+        }, SPLASH_TIME)
     }
 }

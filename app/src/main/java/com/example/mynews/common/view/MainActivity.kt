@@ -1,24 +1,25 @@
-package com.example.mynews.views
+package com.example.mynews.common.view
 
-import android.content.Context
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.os.PersistableBundle
 import com.example.mynews.R
-import com.example.mynews.adapter.AdapterNews
-import com.example.mynews.databinding.ActivityMainBinding
-import com.example.mynews.model.News
-import com.example.mynews.presenter.MainActivityPresenter
-import com.example.root.mymvvp.utility.ApisUrl
 
+class MainActivity : BaseActivity() {
 
+    companion object {
+        fun newInstance() = MainActivity()
+    }
 
-class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onCreate(savedInstanceState, persistentState)
+        setContentView(R.layout.activity_main)
 
-    lateinit var binding: ActivityMainBinding
-    lateinit var context: Context
+        if (savedInstanceState == null){
+            navigator.onStartMainActivity()
+        }
+    }
+
+    /*lateinit var binding: ActivityMainBinding
     var presenter: MainActivityPresenter? = null
     lateinit var listOfNews: ArrayList<News>
     lateinit var newsAdapter: AdapterNews
@@ -30,22 +31,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        context = this@MainActivity
-        presenter = MainActivityPresenter(context)
+        presenter = MainActivityPresenter(this)
 
         listOfNews = arrayListOf()
         if (savedInstanceState !=null)
-        listOfNews = savedInstanceState!!.getSerializable(ApisUrl.ARTICLES) as ArrayList<News>
+        listOfNews = savedInstanceState.getSerializable(ApisUrl.ARTICLES) as ArrayList<News>
 
         initData()
-
-
     }
 
     private fun initData() {
 
         recyclerNews = binding.listNews
-        newsAdapter = AdapterNews(presenter, listOfNews, recyclerNews, count, context)
+        newsAdapter = AdapterNews(presenter, listOfNews, recyclerNews, count, this)
 
 
         recyclerNews.layoutManager = LinearLayoutManager(context)
@@ -87,12 +85,11 @@ class MainActivity : AppCompatActivity() {
         presenter!!.getListNews(recyclerNews, listOfNews, count)
 
     }
-
+*/
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
-        outState!!.putSerializable(ApisUrl.ARTICLES, listOfNews)
+        //outState!!.putSerializable(ApisUrl.ARTICLES, listOfNews)
     }
-
 }
 
 

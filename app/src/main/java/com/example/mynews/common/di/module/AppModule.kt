@@ -1,8 +1,11 @@
-package com.example.mynews.di.module
+package com.example.mynews.common.di.module
 
 import android.content.Context
-import com.example.mynews.presenter.MainActivityPresenter
-import com.wolo.a222.feature.common.di.Scope.PerApplication
+import com.example.mynews.common.di.scope.PerApplication
+import com.example.mynews.common.navigation.Navigator
+import com.example.mynews.common.navigation.NavigatorImpl
+import com.example.mynews.common.presenter.MainActivityPresenter
+import com.example.mynews.common.presenter.MainActivityPresenterImpl
 import dagger.Module
 import dagger.Provides
 
@@ -15,7 +18,12 @@ class AppModule(private val context: Context) {
 
     @Provides
     @PerApplication
-    internal fun provideMainActivityPresenter(context: Context)  = MainActivityPresenter(context)
+    fun provideNavigator(navigator: NavigatorImpl): Navigator = navigator
+
+    @Provides
+    @PerApplication
+    fun provideMainActivityPresenter(presenter: MainActivityPresenterImpl): MainActivityPresenter = presenter
+
 
     /*@Provides
     @PerApplication

@@ -1,31 +1,18 @@
 package com.example.mynews
 
 import android.app.Application
-import android.content.Context
-import com.example.mynews.di.component.AppComponent
-import com.example.mynews.di.component.DaggerAppComponent
-import com.example.mynews.di.module.AppModule
-import com.example.mynews.retrofit.RetrofitSingleton
+import com.example.mynews.common.di.injector.AppInjector
+import com.example.mynews.common.di.injector.Injector
+import com.example.mynews.common.di.injector.InjectorProvider
 
-class MyNewsApp: Application() {
+class MyNewsApp: Application(), InjectorProvider {
 
-    internal lateinit var appComponent: AppComponent
-
-    override fun attachBaseContext(base: Context?) {
-        super.attachBaseContext(base)
-        appComponent = buildComponent(base!!)
-    }
+    override lateinit var injector: Injector
 
     @Override
     override fun onCreate() {
         super.onCreate()
-        appComponent.inject(this)
-        RetrofitSingleton.init(1, this)
-    }
-
-    private fun buildComponent(context: Context): AppComponent {
-        return DaggerAppComponent.builder()
-            .appModule(AppModule(context))
-            .build()
+        injector = AppInjector(this)
+        injector.getAppComponent().inject(this)
     }
 }

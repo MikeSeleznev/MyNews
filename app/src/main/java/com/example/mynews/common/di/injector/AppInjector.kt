@@ -1,9 +1,9 @@
-package com.example.mynews.di.injector
+package com.example.mynews.common.di.injector
 
 import android.content.Context
-import com.example.mynews.di.component.AppComponent
-import com.example.mynews.di.component.DaggerAppComponent
-import com.example.mynews.di.module.AppModule
+import com.example.mynews.common.di.component.AppComponent
+import com.example.mynews.common.di.component.DaggerAppComponent
+import com.example.mynews.common.di.module.AppModule
 
 class AppInjector(context: Context): Injector {
 
