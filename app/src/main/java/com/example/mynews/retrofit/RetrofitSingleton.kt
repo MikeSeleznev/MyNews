@@ -4,7 +4,6 @@ import android.content.Context
 import com.example.mynews.model.News
 import com.example.root.mymvvp.utility.ApisUrl
 import com.google.gson.GsonBuilder
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
@@ -26,16 +25,16 @@ class RetrofitSingleton {
 
         fun init(count: Int, context: Context) {
 
-            var rxAdapter = RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io())
-            var gson = GsonBuilder().create()
+            val rxAdapter = RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io())
+            val gson = GsonBuilder().create()
 
-            var okHttpClient: OkHttpClient = OkHttpClient.Builder()
+            val okHttpClient: OkHttpClient = OkHttpClient.Builder()
                 .addInterceptor(Interceptors.Companion.OfflineCacheInterceptor(context))
                 .addNetworkInterceptor(Interceptors.Companion.NetworkCacheInterceptor(context))
                 .cache(Interceptors.provideCache(context))
                 .build()
 
-            var retrofit = Retrofit.Builder()
+            val retrofit = Retrofit.Builder()
                 .baseUrl(ApisUrl.BASE_URL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
@@ -49,7 +48,7 @@ class RetrofitSingleton {
         }
 
 
-        fun resetNewsObservable(){
+        private fun resetNewsObservable(){
             observableNewsList = BehaviorSubject.create()
             subscription = observableRetrofit.subscribe(object : Subscriber<News>() {
                 override fun onNext(t: News?) {

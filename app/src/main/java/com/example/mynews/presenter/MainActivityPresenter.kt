@@ -4,13 +4,13 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import com.example.mynews.model.News
 import com.example.mynews.retrofit.RetrofitSingleton
+
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import javax.inject.Inject
 
-class MainActivityPresenter(var context: Context) {
-
-
+class MainActivityPresenter @Inject constructor(private val context: Context) {
 
     fun getListNews(recyclerNews: RecyclerView, listOfNews:  ArrayList<News>, count: Int){
 

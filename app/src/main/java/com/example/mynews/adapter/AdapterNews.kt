@@ -15,7 +15,7 @@ import com.example.mynews.presenter.MainActivityPresenter
 import com.example.mynews.views.WebActivity
 
 
-class AdapterNews(var presenter: MainActivityPresenter?, var listOfNews: ArrayList<News>, var recyclerNews: RecyclerView, var count: Int, var context: Context): RecyclerView.Adapter<AdapterNews.ViewHolder>() {
+class AdapterNews(var listOfNews: ArrayList<News>, var recyclerNews: RecyclerView, var count: Int, var context: Context): RecyclerView.Adapter<AdapterNews.ViewHolder>() {
 
     var layoutInflater: LayoutInflater? = null
 
@@ -38,7 +38,7 @@ class AdapterNews(var presenter: MainActivityPresenter?, var listOfNews: ArrayLi
             p0.binding.reload.visibility = View.VISIBLE
             p0.binding.reload.setOnClickListener(View.OnClickListener {
                 count += 1
-                presenter!!.getListNews(recyclerNews, listOfNews, count)
+                //presenter!!.getListNews(recyclerNews, listOfNews, count)
             })
 
         }
